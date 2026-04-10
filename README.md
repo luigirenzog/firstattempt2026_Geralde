@@ -113,4 +113,13 @@ src/assets/AlumniCalendar.png
 ### 7th Image: Networking & Events page
 src/assets/Networking&Events.png
 ![7th Image - Networking & Events Page](src/assets/Networking&Events.png)
+![Past Events](src/assets/PastEvents.png)
+![TeachingEvents](src/assets/TeachingEvents.png)
+![Seminars](src/assets/Seminars.png)
+![Directory](src/assets/Directory.png)
+![View Details](src/assets/ViewDetails.png)
+![Event Registration](src/assets/EventRegistration.png)
+![Mentorship](src/assets/Mentorship.png)
+
+
 
