@@ -1,4 +1,4 @@
-# firstattempt_Geralde
+# firstattempt2026_Geralde
 
 ## Geralde
 
@@ -96,13 +96,13 @@ in creating this project use the LIT js as the main framework and use tailwindcs
 ## Screenshots
 These are official actual screenshots of the web application (includes the entire browser).
 
-### 1st Image: src/assets/LoginPage.png
+### 1st Image: Login Page
 ![1st Image - Login Page](src/assets/LoginPage.png)
 
-### 2nd Image: src/assets/SignupPage.png
+### 2nd Image: Signup Page
 ![2nd Image - Sign Up Page](src/assets/SignupPage.png)
 
-### 3rd Image: src/assets/HomePage.png
+### 3rd Image: Home Page
 ![3rd Image - Homepage](src/assets/HomePage.png)
 
 ### 4th Image: News & Updates page
