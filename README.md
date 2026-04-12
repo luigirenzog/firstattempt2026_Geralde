@@ -1,4 +1,6 @@
-# Geralde
+# firstattempt_Geralde
+
+# SGeralde
 
 ## Framework
 Lit
@@ -85,6 +87,11 @@ npm install
 
 ## AI Tools Used
 GitHub Copilot (GPT-5.3-Codex)
+
+## Prompt
+"referencing the first image, convert this mobile login screen to a web login page. for the second and third image are for the sign up page when "sign up" is clicked from the login page.
+
+in creating this project use the LIT js as the main framework and use tailwindcss as the css framework. install LIT js and tailwind css in generating the web page"
 
 ## Screenshots
 These are official actual screenshots of the web application (includes the entire browser).
