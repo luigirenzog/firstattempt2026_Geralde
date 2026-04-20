@@ -9,6 +9,7 @@ class AuthCareerHub extends LitElement {
     showLoginPassword: { state: true },
     showSignUpPassword: { state: true },
     showSignUpConfirmPassword: { state: true },
+    isOffline: { state: true },
   }
 
   constructor() {
@@ -18,6 +19,23 @@ class AuthCareerHub extends LitElement {
     this.showLoginPassword = false
     this.showSignUpPassword = false
     this.showSignUpConfirmPassword = false
+    this.isOffline = !navigator.onLine
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('online', this.updateNetworkStatus)
+    window.addEventListener('offline', this.updateNetworkStatus)
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('online', this.updateNetworkStatus)
+    window.removeEventListener('offline', this.updateNetworkStatus)
+    super.disconnectedCallback()
+  }
+
+  updateNetworkStatus = () => {
+    this.isOffline = !navigator.onLine
   }
 
   createRenderRoot() {
@@ -26,10 +44,14 @@ class AuthCareerHub extends LitElement {
 
   render() {
     if (this.isLoggedIn) {
-      return html`<alumni-homepage @logout=${this.onLogout}></alumni-homepage>`
+      return html`
+        ${this.renderOfflineBanner()}
+        <alumni-homepage @logout=${this.onLogout}></alumni-homepage>
+      `
     }
 
     return html`
+      ${this.renderOfflineBanner()}
       <main class="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#334bab] via-[#2b469f] to-[#2a4198] px-4 py-6 text-[#102a73] sm:px-6 sm:py-8">
         <div class="pointer-events-none absolute -left-12 -top-10 h-40 w-40 rounded-full bg-white/15"></div>
         <div class="pointer-events-none absolute -right-14 top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-white/15"></div>
@@ -61,6 +83,18 @@ class AuthCareerHub extends LitElement {
           </div>
         </section>
       </main>
+    `
+  }
+
+  renderOfflineBanner() {
+    if (!this.isOffline) {
+      return ''
+    }
+
+    return html`
+      <div class="fixed left-1/2 top-3 z-50 w-[calc(100%-1.5rem)] max-w-[760px] -translate-x-1/2 rounded-xl border border-[#f7d58e] bg-[#fff7d6] px-4 py-2 text-center text-[14px] font-semibold text-[#6f4e00] shadow-[0_14px_26px_-18px_rgba(0,0,0,0.55)] sm:text-[15px]">
+        Offline mode: showing cached content.
+      </div>
     `
   }
 
@@ -333,3 +367,11 @@ class AuthCareerHub extends LitElement {
 }
 
 customElements.define('auth-career-hub', AuthCareerHub)
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .catch((error) => console.error('Service worker registration failed:', error))
+  })
+}

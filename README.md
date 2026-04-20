@@ -93,6 +93,70 @@ GitHub Copilot (GPT-5.3-Codex)
 
 in creating this project use the LIT js as the main framework and use tailwindcss as the css framework. install LIT js and tailwind css in generating the web page"
 
+## PWA Conversion Documentation
+
+### Master Prompt (PWA)
+"Help me generate a valid manifest.json file for my Progressive Web Application (PWA). The app should include University Branding with the following details:
+
+Name: "University App"
+Short Name: "UniApp"
+Description: "A high-performance, offline-ready Progressive Web Application for university services."
+Start URL: "/"
+Display: "standalone"
+Background Color: "#ffffff"
+Theme Color: "#0047ab" (University Blue)
+Icons: Use placeholders for now (e.g., /assets/icon-192x192.png, /assets/icon-512x512.png).
+
+Provide the complete JSON structure for the file and explain where to save it in my project."
+
+### Completed Checklist
+- [x] Created manifest file: public/manifest.json
+	- [x] Set app metadata (name, short_name, description, start_url, display, colors)
+	- [x] Added icons for 192x192 and 512x512
+- [x] Linked manifest in HTML head: index.html
+- [x] Created and registered service worker: public/service-worker.js and src/my-element.js
+- [x] Added caching strategies
+	- [x] App shell pre-cache for core files
+	- [x] Static asset cache-first with background update (CSS, JS, images, fonts)
+	- [x] Navigation network-first with offline fallback
+	- [x] API/dynamic content network-first with cache fallback
+- [x] Added actual icon files
+	- [x] public/assets/icon-192x192.png
+	- [x] public/assets/icon-512x512.png
+- [x] Added offline status banner in UI when browser is offline
+- [x] Verified cache version migration and old cache cleanup
+
+### Hallucinations and Fixes
+I used this section to log mismatches between what I expected and what actually happened, then documented how I fixed each issue.
+
+| 2026-04-20 | I clicked the service worker Update button in DevTools, but nothing changed.
+- I could not see the new cache version right away. 
+- I turned off offline mode, then forced an update/unregister and reloaded the app. 
+- I confirmed v2/v3/v4 caches appeared correctly and older versions were removed. 
+
+|2026-04-20 | I saw a stale service-worker.js version in DevTools Sources. 
+- I was unsure whether CACHE_VERSION was actually updated. 
+- I verified and edited the real project file in public/service-worker.js, then reloaded the service worker. 
+- I confirmed the running worker and cache names matched the latest version. 
+
+| 2026-04-20 | My app reload briefly failed with ERR_CONNECTION_REFUSED. 
+- I could not validate service worker changes during that moment. 
+- I restarted the Vite dev server. 
+- I confirmed the app loaded again and the service worker returned to activated state. 
+
+#### Blank Template (Copy for New Issues)
+| Date | Issue / Hallucination | Impact | Fix Applied | Verification |
+|---|---|---|---|---|
+| YYYY-MM-DD | I noticed... | This caused... | I fixed it by... | I confirmed the fix by... |
+
+### Local Testing Notes
+1. Start app with npm run dev.
+2. Open DevTools > Application.
+3. Confirm service worker is activated.
+4. Open Cache storage and verify current version caches exist.
+5. In Network tab, switch to Offline and reload to confirm cached UI still renders.
+6. Bump CACHE_VERSION in public/service-worker.js and reload to verify old caches are cleaned up.
+
 ## Screenshots
 These are official actual screenshots of the web application (includes the entire browser).
 
