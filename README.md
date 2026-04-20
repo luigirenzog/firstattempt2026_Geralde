@@ -144,11 +144,6 @@ I used this section to log mismatches between what I expected and what actually 
 - I restarted the Vite dev server. 
 - I confirmed the app loaded again and the service worker returned to activated state. 
 
-#### Blank Template (Copy for New Issues)
-| Date | Issue / Hallucination | Impact | Fix Applied | Verification |
-|---|---|---|---|---|
-| YYYY-MM-DD | I noticed... | This caused... | I fixed it by... | I confirmed the fix by... |
-
 ### Local Testing Notes
 1. Start app with npm run dev.
 2. Open DevTools > Application.
